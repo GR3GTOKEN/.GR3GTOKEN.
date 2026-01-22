@@ -70,10 +70,10 @@ wcBtn.onclick = async ()=>{
     window.ethereum=wcProvider;
     provider=new ethers.providers.Web3Provider(wcProvider);
     signer=provider.getSigner();
-    activeProviderType='walletconnect';
+    activeProviderType='Other walletconnect';
     await connected();
   } catch(err){ console.error(err); updateStatusMessage('WalletConnect failed','error'); }
-  wcBtn.disabled=false; wcBtn.textContent="WalletConnect";
+  wcBtn.disabled=false; wcBtn.textContent="Other WalletConnect";
 };
 
 approveBtn.onclick=async()=>{
